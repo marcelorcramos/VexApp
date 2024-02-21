@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/maindesign"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="-60dp"
+        android:alpha="0.2"
+        android:background="@drawable/designmain"
+/>
+
+    <View
+        android:id="@+id/maindesign2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="10dp"
+        android:alpha="0.2"
+        android:background="@drawable/designmain"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/maindesign"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="50dp"
+        android:src="@drawable/carrocarregando"
+        android:layout_marginTop="-130dp" />
+
+    <TextView
+        android:id="@+id/txtSejaBemVindo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simplifique a sua vida com VEX"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="353dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtExplicacao"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="A VEX é uma aplicação criada com o objetivo de facilitar a vida de quem usa carros elétricos, ajudando e auxiliando com todas as funções necessárias e muito mais!"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:layout_marginTop="408dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:alpha="0.7"
+        android:backgroundTint="@color/verdeclaro"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="556dp" />
+
+    <Button
+        android:id="@+id/btnCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:alpha="0.7"
+        android:backgroundTint="@color/verdeclaro"
+        android:text="Cadastre-se"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="611dp" />
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Historico">
+
+    <TextView
+        android:id="@+id/ic_seta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_seta"
+        />
+
+    <View
+        android:id="@+id/maindesign"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="-60dp"
+        android:alpha="0.2"
+        android:background="@drawable/designmain"
+        />
+
+    <View
+        android:id="@+id/maindesign2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="10dp"
+        android:alpha="0.2"
+        android:background="@drawable/designmain"
+        />
+
+
+    <TextView
+        android:id="@+id/txtSejaBemVindo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Histórico de carregamentos"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

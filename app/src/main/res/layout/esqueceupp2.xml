@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/esqueceupp2"
+    android:layout_margin="20dp"
+    android:padding="20dp">
+    \
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/esqueceuBox"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/esqueceu_borda"
+        android:alpha="0.8">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/esqueceuTitulo"
+            android:background="@drawable/esqueceupp"
+            android:padding="10dp"
+            android:alpha="0.8"
+            android:text="Esqueceu sua palavra passe"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:drawableLeft="@drawable/ic_reset"
+            android:drawablePadding="8dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descricao"
+            android:text="Introduza seu email"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/verdeclaro"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/esqueceuTitulo"
+            app:layout_constraintBottom_toTopOf="@+id/editBox"/>
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editBox"
+            android:textColor="@color/verdeclaro"
+            android:textSize="16sp"
+            android:layout_marginStart="20sp"
+            android:backgroundTint="@color/verdeclaro"
+            android:layout_marginBottom="30dp"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/esqueceuTitulo"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnCancelar"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="Cancelar"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/verdeclaro"
+            android:alpha="0.8"
+            app:cornerRadius = "20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/editBox"
+            app:layout_constraintBottom_toBottomOf="@+id/esqueceuBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnResetar"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnResetar"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Resetar"
+            app:cornerRadius = "20dp"
+            android:backgroundTint="@color/verdeclaro"
+            android:alpha="0.8"
+            app:layout_constraintBottom_toBottomOf="@id/esqueceuBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnCancelar"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/possivel2"
+    android:alpha="0.8"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/ic_seta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_seta"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vexlogo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="70dp"
+
+        />
+
+
+    <View
+        android:id="@+id/containerLogin"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="210dp"
+        android:alpha="0.7"
+        android:background="@drawable/container_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="165dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintTop_toTopOf="@id/containerLogin" />
+
+    <TextView
+        android:id="@+id/txtIntroducao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introduza os seus dados"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="110dp"
+        app:layout_constraintTop_toTopOf="@id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@+id/containerLogin"/>
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginBottom="360dp"
+        android:background="@drawable/container_login"
+        android:drawableRight="@drawable/ic_email"
+        android:hint=" Email"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintTop_toBottomOf="@id/txtIntroducao"
+        />
+
+    <EditText
+        android:id="@+id/editPalavraPasse"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:hint=" Palavra-passe"
+        android:background="@drawable/container_login"
+        android:inputType="numberPassword"
+        android:maxLines="1"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="300dp"
+        android:layout_marginHorizontal="60dp"
+        android:drawableRight="@drawable/ic_lock"
+        app:layout_constraintTop_toBottomOf="@id/editEmail"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@id/containerLogin"/>
+
+    <TextView
+        android:id="@+id/txtEsqueceu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esqueceu sua palavra-passe?"
+        android:textSize="16dp"
+        android:textColor="@color/azulclaro"
+        android:textStyle="bold"
+        android:layout_marginTop="435dp"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintTop_toTopOf="@id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@+id/containerLogin"/>
+
+
+    <TextView
+        android:id="@+id/txtNaoTemConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não tem conta?"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="565dp"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintTop_toTopOf="@id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@+id/containerLogin"/>
+
+    <TextView
+        android:id="@+id/txtCadastrese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registe-se"
+        android:textSize="16dp"
+        android:textColor="@color/azulclaro"
+        android:textStyle="bold"
+        android:layout_marginTop="565dp"
+        android:layout_marginLeft="215dp"
+        app:layout_constraintTop_toTopOf="@id/containerLogin"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@+id/containerLogin"/>
+
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="510dp"
+        android:layout_marginLeft="-20dp"
+        android:backgroundTint="@color/verdeclaro"
+        app:layout_constraintTop_toBottomOf="@id/txtEsqueceu"
+        app:layout_constraintStart_toStartOf="@id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@id/containerLogin"
+        app:layout_constraintBottom_toBottomOf="@id/containerLogin"/>
+
+
+</RelativeLayout>

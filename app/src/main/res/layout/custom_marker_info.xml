@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:backgroundTint="@color/verdeclaro"
+    >
+
+    <View
+        android:id="@+id/maindesign2"
+        android:layout_width="500dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="320dp"
+        android:background="@drawable/organizador" />
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        tools:text="nome"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="50dp"/>
+
+
+    <TextView
+        android:id="@+id/txt_adress"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="16sp"
+        tools:text="adress"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="355dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/txt_cp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        tools:text="1000-087"
+        android:layout_marginLeft="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"/>
+
+    <TextView
+        android:id="@+id/txt_nivel1"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/ic_raio"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="50dp"/>
+
+
+    <TextView
+        android:id="@+id/txt_tipo"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="15sp"
+        tools:text="CCS2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="50dp"/>
+
+    <Button
+        android:id="@+id/btnGO"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="260dp"
+        android:backgroundTint="@color/secundaria"
+        android:drawableRight="@drawable/ic_carro"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+
+
+</RelativeLayout>
