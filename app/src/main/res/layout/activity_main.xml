@@ -77,7 +77,7 @@
         android:layout_marginHorizontal="80dp"
         android:alpha="0.7"
         android:backgroundTint="@color/verdeclaro"
-        android:text="Cadastre-se"
+        android:text="Registe-se"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold"

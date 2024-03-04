@@ -18,11 +18,20 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.vexaplicao2.databinding.ActivityPrincipalBinding
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.Marker
-
+import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.serialization.Serializable
+import io.ktor.client.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.request.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
@@ -235,6 +244,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
 
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
@@ -313,7 +323,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED ){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_REQUEST_CODE)
             return
         }
@@ -322,7 +332,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
             if (location != null){
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
+               // placeMarkerOnMap(currentLatLng)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,12f))
             }
         }
@@ -348,7 +358,88 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         }
     }
 
-    override fun onMarkerClick(p0: Marker) = false
+    //override fun onMarkerClick(p0: Marker) = false
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val place = marker.tag as? Place
+        place?.let {
+            fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
+        }
+        return false
+    }
+
+
+    private fun getDirectionsUrl(from: LatLng, to: LatLng): String {
+        val origin = "origin=${from.latitude},${from.longitude}"
+        val destination = "destination=${to.latitude},${to.longitude}"
+        val sensor = "sensor=false"
+        val params = "$origin&$destination&$sensor"
+        return "https://maps.googleapis.com/maps/api/directions/json?$params"
+    }
+
+    private fun fetchDirections(from: LatLng, to: LatLng) {
+        val url = getDirectionsUrl(from, to)
+        GlobalScope.launch {
+            val result = directionClient(url)
+            drawPolyline(result.toString())
+        }
+    }
+
+    suspend fun directionClient(url: String): DirectionsResponse {
+        val client = HttpClient {
+            install(JsonFeature) {
+                serializer = KotlinxSerializer()
+            }
+        }
+
+        val directionsResponse: DirectionsResponse = client.get(url)
+        client.close()
+        return directionsResponse
+    }
+
+    private fun drawPolyline(polylinePoints: String) {
+        val options = PolylineOptions()
+        options.color(Color.RED)
+        options.width(5f)
+        options.addAll(decodePolyline(polylinePoints))
+        map.addPolyline(options)
+    }
+
+    private fun decodePolyline(encoded: String): List<LatLng> {
+        val poly = ArrayList<LatLng>()
+        var index =  0
+        var len = encoded.length
+        var lat =  0
+        var lng =  0
+
+        while (index < len) {
+            var b: Int
+            var shift =  0
+            var result =  0
+            do {
+                b = encoded[index++].toInt() -  63
+                result = result or ((b and  0x1f).shl(shift))
+                shift +=  5
+            } while (b >=  0x20)
+            val dlat = if (result and  1 !=  0) (result shr  1).inv() else result shr  1
+            lat += dlat
+
+            shift =  0
+            result =  0
+            do {
+                b = encoded[index++].toInt() -  63
+                result = result or ((b and  0x1f).shl(shift))
+                shift +=  5
+            } while (b >=  0x20)
+            val dlng = if (result and  1 !=  0) (result shr  1).inv() else result shr  1
+            lng += dlng
+
+            val p = LatLng((lat.toDouble() /  1E5), (lng.toDouble() /  1E5))
+            poly.add(p)
+        }
+
+        return poly
+    }
 
 }
 
@@ -360,3 +451,24 @@ data class Place (
                             val tipo : String,
                                 val nivel : String
     )
+
+@Serializable
+data class DirectionsResponse(val routes: List<Route>) {
+    @Serializable
+    data class Route(val legs: List<Leg>, val overview_polyline: OverviewPolyline)
+
+    @Serializable
+    data class Leg(val steps: List<Step>)
+
+    @Serializable
+    data class Step(val start_location: LatLng, val end_location: LatLng, val polyline: Polyline)
+
+    @Serializable
+    data class OverviewPolyline(val points: String)
+
+    @Serializable
+    data class Polyline(val points: String)
+
+    @Serializable
+    data class LatLng(val lat: Double, val lng: Double)
+}

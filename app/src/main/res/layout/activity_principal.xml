@@ -14,12 +14,13 @@
 
         <View
             android:id="@+id/menubar"
-            android:layout_width="385dp"
+            android:layout_width="550dp"
             android:layout_height="80dp"
-            android:layout_marginHorizontal="3dp"
-            android:layout_marginTop="645dp"
-            android:backgroundTint="@color/white"
-            android:background="@drawable/menubar" />
+            android:layout_marginHorizontal="0dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="675dp"
+            android:background="@drawable/menubar"
+            android:backgroundTint="@color/white" />
 
         <View
             android:id="@+id/alertTitle"
@@ -44,17 +45,17 @@
             android:id="@+id/btnHistorico"
             android:layout_width="85dp"
             android:layout_height="70dp"
-            android:layout_marginTop="650dp"
+            android:layout_marginTop="670dp"
             android:layout_marginLeft="60dp"
-            android:backgroundTint="@color/secundaria"
+            android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/ic_historico" />
 
         <Button
             android:id="@+id/btnPerfil"
             android:layout_width="85dp"
             android:layout_height="70dp"
-            android:layout_marginTop="650dp"
+            android:layout_marginTop="670dp"
             android:layout_marginLeft="260dp"
-            android:backgroundTint="@color/secundaria"
+            android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/ic_perfil"/>
 </FrameLayout>
