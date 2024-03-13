@@ -6,11 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".Principal">
 
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map_fragment"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:queryHint="Onde deseja ir?"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/searchview_background"
+            android:queryBackground="@android:color/transparent"
+            />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
 
         <View
             android:id="@+id/menubar"
@@ -31,18 +52,10 @@
             android:background="@drawable/alert"
             android:backgroundTint="@color/white"/>
 
-        <Button
-            android:id="@+id/btnAlert"
-            android:layout_width="50dp"
-            android:layout_height="52dp"
-
-            android:layout_marginTop="140dp"
-            android:layout_marginLeft="325dp"
-            android:backgroundTint="@color/red"
-            android:drawableTop="@drawable/ic_alert3" />
 
         <Button
             android:id="@+id/btnHistorico"
+            android:hint="a"
             android:layout_width="85dp"
             android:layout_height="70dp"
             android:layout_marginTop="670dp"
@@ -52,10 +65,21 @@
 
         <Button
             android:id="@+id/btnPerfil"
+            android:hint="a"
             android:layout_width="85dp"
             android:layout_height="70dp"
             android:layout_marginTop="670dp"
             android:layout_marginLeft="260dp"
             android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/ic_perfil"/>
+
+        <Button
+            android:id="@+id/btnAlert"
+            android:hint="a"
+            android:layout_width="50dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="325dp"
+            android:backgroundTint="@color/red"
+            android:drawableTop="@drawable/ic_alert3" />
 </FrameLayout>

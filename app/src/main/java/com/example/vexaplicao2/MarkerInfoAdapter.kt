@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 
 class MarkerInfoAdapter(private val context : Context) : GoogleMap.InfoWindowAdapter {
@@ -19,6 +20,7 @@ class MarkerInfoAdapter(private val context : Context) : GoogleMap.InfoWindowAda
         view.findViewById<TextView>(R.id.txt_cp).text = place.cp
         view.findViewById<TextView>(R.id.txt_nivel1).text = place.nivel
         view.findViewById<TextView>(R.id.txt_tipo).text = place.tipo
+
         return view
     }
 }

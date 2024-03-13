@@ -21,8 +21,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.Icon
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.SearchView
+import androidx.annotation.ColorInt
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.serialization.Serializable
@@ -30,12 +37,12 @@ import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var binding: ActivityPrincipalBinding
+    private lateinit var searchView: SearchView
+    private lateinit var ListView: ListView
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
@@ -251,6 +258,26 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         setContentView(R.layout.activity_principal)
         setContentView(binding.root)
 
+        val placesAdapter : ArrayAdapter<Place> = ArrayAdapter(
+            this, android.R.layout.simple_list_item_1,places
+        )
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchView.clearFocus()
+                if (places.contains<Any?>(query)){
+                    placesAdapter.filter.filter(query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                placesAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
+
         binding.btnHistorico.setOnClickListener() {
             val irHistorico = Intent(this, Historico::class.java)
             startActivity(irHistorico)
@@ -282,7 +309,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
 
       val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-       /* mapFragment.getMapAsync(){googleMap ->
+        mapFragment.getMapAsync(){googleMap ->
             googleMap.setInfoWindowAdapter(MarkerInfoAdapter(this))
             addMarkers(googleMap)
 
@@ -296,7 +323,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
                     bounds.include(it.latLng)
                 }
             }
-        }*/
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -353,21 +380,25 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
                     .snippet(place.address)
                     .position(place.latLng)
                     .snippet(place.cp)
+                    .icon(
+                        BitmapHelper.vectorToBitmap(this, R.drawable.ic_bolt3,ContextCompat.getColor(this,R.color.verdeclaro))
+                    )
             )
-            marker?.tag = place
+           marker?.tag = place
         }
     }
+
 
     //override fun onMarkerClick(p0: Marker) = false
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val place = marker.tag as? Place
         place?.let {
-            fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
+           // fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
         }
         return false
     }
-
+/*
 
     private fun getDirectionsUrl(from: LatLng, to: LatLng): String {
         val origin = "origin=${from.latitude},${from.longitude}"
@@ -439,7 +470,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         }
 
         return poly
-    }
+    }*/
 
 }
 
@@ -451,7 +482,7 @@ data class Place (
                             val tipo : String,
                                 val nivel : String
     )
-
+/*
 @Serializable
 data class DirectionsResponse(val routes: List<Route>) {
     @Serializable
@@ -471,4 +502,4 @@ data class DirectionsResponse(val routes: List<Route>) {
 
     @Serializable
     data class LatLng(val lat: Double, val lng: Double)
-}
+}*/

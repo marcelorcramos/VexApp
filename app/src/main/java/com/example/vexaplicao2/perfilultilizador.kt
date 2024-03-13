@@ -49,11 +49,27 @@ class perfilultilizador : AppCompatActivity() {
             val carro = binding.editCarro.text.toString()
             val matricula = binding.editMatricula.text.toString()
 
-            val adicional = adicional(profissao, carro, matricula)
-            if(adicional != null){
-
-                Toast.makeText(this,"As informações foram adicionadas com sucesso!!", Toast.LENGTH_SHORT).show()
+            if (profissao.isNotEmpty() && carro.isNotEmpty() && matricula.isNotEmpty()) {
+                if (carro != matricula) {
+                    firebaseAuth.addAuthStateListener(carro, matricula)
+                    Toast.makeText(this, "As informações foram adicionadas ao seu perfil!", Toast.LENGTH_SHORT).show()
+                        .addOnCompleteListener() {
+                        }
+                } else {
+                    Toast.makeText(this, "As informações estão erradas", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Os campos não podem estar vazios", Toast.LENGTH_SHORT).show()
             }
         }
+        }
     }
+
+private fun Unit.addOnCompleteListener(function: () -> Unit) {
+    TODO("Not yet implemented")
 }
+
+private fun FirebaseAuth.addAuthStateListener(carro: String, matricula: String) {
+    TODO("Not yet implemented")
+}
+
