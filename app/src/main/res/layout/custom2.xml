@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        tools:text="nome"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/txt_adress"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="16sp"
+        tools:text="adress"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt_cp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        tools:text="1000-087"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txt_nivel1"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/ic_raio"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/txt_tipo"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="15sp"
+        tools:text="CCS2"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -9,8 +9,10 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -42,7 +44,8 @@ import kotlinx.serialization.json.jsonPrimitive
 
 private const val API_KEY = "AIzaSyCk7uHlsplDsaPYeR4v9nvhy3sZLFnozTA"
 
-class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+    GoogleMap.InfoWindowAdapter {
 
     private lateinit var binding: ActivityPrincipalBinding
     private lateinit var currentLocation: Location
@@ -251,7 +254,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         Place("Espaço Amoreiras", LatLng(38.72082,-9.1608957),"Rua Dom João V 24","1250-091", "TYPE 2 ","2"),
         Place("Espaço Amoreiras", LatLng(38.720881,-9.1603597),"Rua Dom João V 24","1250-091", "TYPE 2 ","2"),
         Place("Rua Gorgel do Amaral", LatLng(38.721723,-9.1601737),"R. Gorgel do Amaral 3-1","1250-001", "TYPE 2 ","1"),
-        )
+    )
 
 
     @SuppressLint("SuspiciousIndentation")
@@ -300,7 +303,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         map = googleMap
         map.uiSettings.isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
-        map.setInfoWindowAdapter(MarkerInfoAdapter(this))
+        map.setInfoWindowAdapter(this)
         addMarkers(map)
 
         map.setOnMapLoadedCallback {
@@ -355,7 +358,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
                     .snippet(place.tipo)
                     .position(place.latLng)
                     .icon(BitmapHelper.vectorToBitmap(this, R.drawable.ic_bolt3,
-                            ContextCompat.getColor(this,R.color.verdeclaro))
+                        ContextCompat.getColor(this,R.color.verdeclaro))
                     )
             )
             marker?.tag = place
@@ -377,7 +380,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
             fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
             saveMarkerClickEvent(marker)
         }
-        return true
+        return false
 
     }
 
@@ -531,6 +534,37 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
             points.add(latLng)
         }
         return points
+    }
+
+    override fun getInfoWindow(marker: Marker): View? {
+        // Return null to use the default info window
+        return null
+    }
+
+    override fun getInfoContents(marker: Marker): View {
+        // Create and inflate the custom info window layout
+        val view = layoutInflater.inflate(R.layout.custom2, null)
+
+        // Find views within the layout
+        val txtTitle: TextView = view.findViewById(R.id.txt_title)
+        val txtAddress: TextView = view.findViewById(R.id.txt_adress)
+        val txtCp: TextView = view.findViewById(R.id.txt_cp)
+        val txtNivel1: TextView = view.findViewById(R.id.txt_nivel1)
+        val txtTipo: TextView = view.findViewById(R.id.txt_tipo)
+
+        // Get the Place object from the marker's tag
+        val place = marker.tag as? Place
+
+        // Populate the views with marker information
+        place?.let {
+            txtTitle.text = it.name
+            txtAddress.text = it.address
+            txtCp.text = it.cp
+            // Set any additional information
+        }
+
+        // Return the populated view as the info window contents
+        return view
     }
 
     data class Place(

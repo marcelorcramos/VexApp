@@ -12,7 +12,7 @@ class MarkerInfoAdapter(private val context : Context) : GoogleMap.InfoWindowAda
 
     override fun getInfoWindow(marker: Marker): View? {
         val place = marker.tag as? Principal.Place ?: return null
-     val view= LayoutInflater.from(context).inflate(R.layout.custom_marker_info,null)
+     val view= LayoutInflater.from(context).inflate(R.layout.custom2,null)
 
         view.findViewById<TextView>(R.id.txt_title).text = place.name
         view.findViewById<TextView>(R.id.txt_adress).text = place.address
