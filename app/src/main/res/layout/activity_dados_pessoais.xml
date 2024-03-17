@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DadosPessoais">
+
+    <TextView
+        android:id="@+id/ic_seta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_seta"
+        />
+
+    <TextView
+        android:id="@+id/txttitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dados Pessoais"
+        android:textColor="@color/black"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp" />
+
+
+    <View
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/container_login" />
+
+    <TextView
+        android:id="@+id/txtnome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Marcelo Ramos"
+        android:textColor="@color/secundaria"
+        android:textSize="18dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="25dp"
+        android:drawableLeft="@drawable/ic_person"
+        android:backgroundTint="@color/white"/>
+
+    <View
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/container_login"
+        />
+
+    <TextView
+        android:id="@+id/txtphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  +351 931 470 356"
+        android:textColor="@color/secundaria"
+        android:textSize="16dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="25dp"
+        android:drawableLeft="@drawable/ic_phone"
+        android:backgroundTint="@color/white"/>
+
+    <View
+        android:id="@+id/container3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/container_login"
+        />
+
+    <TextView
+        android:id="@+id/txtemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  marcelo@gmail.com"
+        android:textColor="@color/secundaria"
+        android:textSize="17dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="25dp"
+        android:drawableLeft="@drawable/ic_email2"
+        android:backgroundTint="@color/white"/>
+
+
+</RelativeLayout>

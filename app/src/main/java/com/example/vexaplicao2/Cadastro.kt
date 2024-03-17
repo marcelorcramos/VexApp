@@ -25,8 +25,7 @@ class Cadastro : AppCompatActivity() {
             val email = binding.editEmail.text.toString()
             val palavrapasse = binding.editPalavraPasse.text.toString()
             val confirmacaopalavrapasse = binding.editPalavraPasseConfirmacao.text.toString()
-
-
+            val emergencia = binding.contactoseguranca.text.toString()
 
             if (email.isNotEmpty() && palavrapasse.isNotEmpty() && confirmacaopalavrapasse.isNotEmpty()) {
                 if (palavrapasse == confirmacaopalavrapasse) {
@@ -36,11 +35,13 @@ class Cadastro : AppCompatActivity() {
                                 val intent = Intent(this, Login::class.java)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                 } else {
-                    Toast.makeText(this, "As palavras-passe não estão iguais", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "As palavras-passe não estão iguais", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
                 Toast.makeText(this, "Os campos não podem estar vazios", Toast.LENGTH_SHORT).show()
@@ -54,5 +55,8 @@ class Cadastro : AppCompatActivity() {
             val voltarMain = Intent(this, MainActivity::class.java)
             startActivity(voltarMain)
         }
+
+
     }
+
 }

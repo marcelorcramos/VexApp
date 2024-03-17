@@ -42,17 +42,16 @@
             app:layout_constraintTop_toBottomOf="@+id/emergenciaTitulo"
             app:layout_constraintBottom_toTopOf="@+id/editBox"/>
 
-        <EditText
+        <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/editBox"
             android:textColor="@color/verdeclaro"
             android:textSize="16sp"
+            android:text="+931 470 356"
             android:layout_marginStart="20sp"
             android:backgroundTint="@color/verdeclaro"
             android:layout_marginBottom="30dp"
-            android:maxLines="1"
-            android:inputType="phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emergenciaTitulo"/>

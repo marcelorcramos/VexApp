@@ -14,36 +14,107 @@
         android:drawableRight="@drawable/ic_seta"
         />
 
-    <View
-        android:id="@+id/maindesign"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="-60dp"
-        android:alpha="0.2"
-        android:background="@drawable/designmain"
-        />
+    <TextView
+        android:id="@+id/txtosmeuscarregamentos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Os meus carregamentos"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
-    <View
-        android:id="@+id/maindesign2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="-50dp"
-        android:layout_marginLeft="10dp"
-        android:alpha="0.2"
-        android:background="@drawable/designmain"
-        />
+    <TextView
+        android:id="@+id/textViewClickCount"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        tools:text="adress"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="50dp"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editBox"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="130dp"
+        android:backgroundTint="@color/black"
+        android:maxLines="1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtrecentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Recentes"
+        android:textColor="@color/black"
+        android:layout_marginLeft="30dp"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
 
     <TextView
-        android:id="@+id/txtSejaBemVindo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Histórico de carregamentos"
+        android:id="@+id/textViewLastClickedMarker"
+        android:layout_width="match_parent"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="150dp"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_bolt5"
+        tools:text="adress"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="20dp"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewLastClickedMarkerInfo"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_info"
+        tools:text="info"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="20dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textinformacaoadicional"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_timer2"
+        tools:text=" time"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="20dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnLimparCliques"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="250dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_hist"
+        android:text="Limpar Cliques"
+        android:onClick="limparCliques"/>
+
+    <Button
+        android:id="@+id/btnirutilizador"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="320dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_user3"
+        android:text="Limpar Cliques"
+        android:onClick="limparCliques"/>
 
 </RelativeLayout>

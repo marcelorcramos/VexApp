@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    kotlin("plugin.serialization") version "1.9.22"
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -44,7 +46,6 @@ android {
 }
 
 dependencies {
-
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
@@ -57,11 +58,12 @@ dependencies {
     implementation("com.beust:klaxon:5.5")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.jpardogo.googleprogressbar:library:1.2.0")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.activity:activity:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -69,4 +71,7 @@ dependencies {
     implementation("io.ktor:ktor-client-json:1.6.7")
     implementation("io.ktor:ktor-client-serialization:1.6.7")
     implementation("io.ktor:ktor-client-cio:1.6.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("com.google.maps.android:android-maps-utils:2.2.0")
 }

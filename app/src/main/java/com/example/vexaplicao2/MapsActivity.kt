@@ -29,22 +29,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val permissionCode =101
 
     private val places = arrayListOf(
-        Place("Pingo Doce Carlos Mardel", LatLng(38.7340809,-9.133378),"R. Carlos Mardel 12","1900-122","CCS2 & CHAdeMO","NIVEL 3"),
-        Place("Hotel Travel Park Lisboa", LatLng(38.7271382,-9.1373133),"Av. Alm. Reis 64","1150-020", "CHAdeMO & CCS2","NIVEL 3"),
-        Place("Hotel Travel Park Lisboa", LatLng(38.7271382,-9.1373133),"Av. Alm. Reis 64","1150-020", "TYPE2","NIVEL 2"),
-        Place("Alameda Dom Afonso Henriques", LatLng(38.7374043,-9.1351184),"Alameda Dom Afonso Henriques","1000-125", "TYPE2","NIVEL 2"),
-        Place("R. Alves Redol", LatLng(38.7365007,-9.1414391),"R. Alves Redol","1000-029", "TYPE 2 ","NIVEL 2"),
-        Place("KLC Charging Station", LatLng(38.7379657,-9.1405744),"R. Alves Redol 7C","1049-001", "TYPE 2","NIVEL 1"),
-        Place("Av. de António José de Almeida", LatLng(38.7382815,-9.1413488),"Av. de António José de Almeida 28A","1000-021", "TYPE 2","NIVEL 2"),
-        Place("Praça de Londres", LatLng(38.7396857,-9.1376345),"Parque Praça de Londres Telpark by Empark","1000-000", "TYPE 2 ","NIVEL 2"),
-        Place("Praça de Londres", LatLng(38.7401948,-9.1368325),"Praça de Londres 10 B","1000-192", "TYPE 2 ","NIVEL 2"),
-        Place("Instituto Superior Tecnico", LatLng(38.737216, -9.139005),"Av. Rovisco Pais 1","1049-001", "TYPE 2 ","NIVEL 2"),
-        Place("Edificio Atrium Saldanha", LatLng(38.7329841,-9.1454947),"Praça Duque de Saldanha 1","1050-094", "TYPE 2 ","NIVEL 2"),
-        Place("Edificio Atrium Saldanha ", LatLng(38.7329841,-9.1454947),"Praça Duque de Saldanha 1","1050-094", "CCS2 & CHAdeMO & TYPE2","NIVEL 4"),
-        Place("Empark Saldanha Residence", LatLng(38.7317411,-9.1472002),"Av. Fontes Pereira de Melo","1050-000", "TYPE 2 ","NIVEL 2"),
-        Place("Parque Estacionamento Saldanha", LatLng(38.7319167,-9.1472255),"R. Latino Coelho,Lisboa","1050-135", "TYPE 2 ","NIVEL 2"),
-        Place("Parque Arco do Cego - Subterrâneo Telpark by Empark", LatLng(38.7363883,-9.1436078),"Av. João Crisóstomo","1000-178", "TYPE 2 ","NIVEL 2"),
-        Place("MOBI.E Charging Station", LatLng(38.7371572,-9.1280937),"R. Cristóvão Falcão 26","1900-167", "TYPE 2 ","NIVEL 1"),
+        Principal.Place(
+            "Pingo Doce Carlos Mardel",
+            LatLng(38.7340809, -9.133378),
+            "R. Carlos Mardel 12",
+            "1900-122",
+            "CCS2 & CHAdeMO",
+            "NIVEL 3"
+        ),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

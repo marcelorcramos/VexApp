@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.vexaplicao2.databinding.ActivityPerfilultilizadorBinding
@@ -32,8 +33,7 @@ class perfilultilizador : AppCompatActivity() {
         binding = ActivityPerfilultilizadorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val uid = firebaseAuth.currentUser?.uid
+
 
         binding.icSeta.setOnClickListener() {
 
@@ -41,28 +41,20 @@ class perfilultilizador : AppCompatActivity() {
             startActivity(voltarMaps)
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Ultilizadores")
-        binding.btnSubmeter.setOnClickListener() {
+        binding.btndadospessoais.setOnClickListener() {
 
-            
-            val profissao = binding.editProfissao.text.toString()
-            val carro = binding.editCarro.text.toString()
-            val matricula = binding.editMatricula.text.toString()
+            val irdadospessoais = Intent(this, DadosPessoais::class.java)
+            startActivity(irdadospessoais)
+        }
 
-            if (profissao.isNotEmpty() && carro.isNotEmpty() && matricula.isNotEmpty()) {
-                if (carro != matricula) {
-                    firebaseAuth.addAuthStateListener(carro, matricula)
-                    Toast.makeText(this, "As informações foram adicionadas ao seu perfil!", Toast.LENGTH_SHORT).show()
-                        .addOnCompleteListener() {
-                        }
-                } else {
-                    Toast.makeText(this, "As informações estão erradas", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Os campos não podem estar vazios", Toast.LENGTH_SHORT).show()
-            }
+        binding.btnirutilizador.setOnClickListener() {
+
+            val irdadospessoais2 = Intent(this, DadosPessoais::class.java)
+            startActivity(irdadospessoais2)
         }
+
         }
+
     }
 
 private fun Unit.addOnCompleteListener(function: () -> Unit) {
@@ -72,4 +64,3 @@ private fun Unit.addOnCompleteListener(function: () -> Unit) {
 private fun FirebaseAuth.addAuthStateListener(carro: String, matricula: String) {
     TODO("Not yet implemented")
 }
-

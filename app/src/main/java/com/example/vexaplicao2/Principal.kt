@@ -1,61 +1,65 @@
 package com.example.vexaplicao2
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.vexaplicao2.databinding.ActivityPrincipalBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.vexaplicao2.databinding.ActivityPrincipalBinding
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.Icon
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.SearchView
-import androidx.annotation.ColorInt
-import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import kotlinx.serialization.Serializable
 import io.ktor.client.*
 import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import com.google.maps.android.PolyUtil
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
-class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+private const val API_KEY = "AIzaSyCk7uHlsplDsaPYeR4v9nvhy3sZLFnozTA"
+
+class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityPrincipalBinding
-    private lateinit var searchView: SearchView
-    private lateinit var ListView: ListView
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
     private lateinit var lastLocation: Location
-    private val permissionCode =1
-    companion object{
+    private lateinit var searchView: SearchView
+    private val permissionCode = 1
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private val polylines = mutableListOf<Polyline>()
+
+    companion object {
         private const val LOCATION_REQUEST_CODE = 1
     }
 
-
-
     private val places = arrayListOf(
-        Place("Pingo Doce Carlos Mardel", LatLng(38.7340809,-9.133378),"R. Carlos Mardel 12","1900-122","CCS2 & CHAdeMO", "3"),
+        Place("Pingo Doce Carlos Mardel",LatLng(38.7340809, -9.133378),"R. Carlos Mardel 12","1900-122","CCS2 & CHAdeMO","3"),
         Place("Hotel Travel Park Lisboa", LatLng(38.7271382,-9.1373133),"Av. Alm. Reis 64","1150-020", "CHAdeMO & CCS2","3"),
         Place("Hotel Travel Park Lisboa", LatLng(38.7271382,-9.1373133),"Av. Alm. Reis 64","1150-020", "TYPE2","2"),
         Place("Alameda Dom Afonso Henriques", LatLng(38.7374043,-9.1351184),"Alameda Dom Afonso Henriques","1000-125", "TYPE2","2"),
@@ -247,8 +251,7 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         Place("Espaço Amoreiras", LatLng(38.72082,-9.1608957),"Rua Dom João V 24","1250-091", "TYPE 2 ","2"),
         Place("Espaço Amoreiras", LatLng(38.720881,-9.1603597),"Rua Dom João V 24","1250-091", "TYPE 2 ","2"),
         Place("Rua Gorgel do Amaral", LatLng(38.721723,-9.1601737),"R. Gorgel do Amaral 3-1","1250-001", "TYPE 2 ","1"),
-    )
-
+        )
 
 
     @SuppressLint("SuspiciousIndentation")
@@ -258,25 +261,6 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         setContentView(R.layout.activity_principal)
         setContentView(binding.root)
 
-        val placesAdapter : ArrayAdapter<Place> = ArrayAdapter(
-            this, android.R.layout.simple_list_item_1,places
-        )
-
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.searchView.clearFocus()
-                if (places.contains<Any?>(query)){
-                    placesAdapter.filter.filter(query)
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                placesAdapter.filter.filter(newText)
-                return false
-            }
-
-        })
 
         binding.btnHistorico.setOnClickListener() {
             val irHistorico = Intent(this, Historico::class.java)
@@ -288,18 +272,18 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
             startActivity(irPerfil)
         }
 
-        binding.btnAlert.setOnClickListener(){
+        binding.btnAlert.setOnClickListener() {
             val builder = AlertDialog.Builder(this)
             val view = layoutInflater.inflate(R.layout.emergencia, null)
 
             builder.setView(view)
             val dialog = builder.create()
 
-            view.findViewById<Button>(R.id.btnCancelar).setOnClickListener(){
+            view.findViewById<Button>(R.id.btnCancelar).setOnClickListener() {
                 dialog.dismiss()
 
             }
-            if (dialog.window != null){
+            if (dialog.window != null) {
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
             }
             dialog.show()
@@ -307,23 +291,9 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-      val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        val mapFragment =
+            supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        mapFragment.getMapAsync(){googleMap ->
-            googleMap.setInfoWindowAdapter(MarkerInfoAdapter(this))
-            addMarkers(googleMap)
-
-            googleMap.setOnMapLoadedCallback {
-
-                val bounds = LatLngBounds.builder()
-               // googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(),200))
-
-
-                 places.forEach(){
-                    bounds.include(it.latLng)
-                }
-            }
-        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -334,12 +304,11 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         addMarkers(map)
 
         map.setOnMapLoadedCallback {
-
-            val bounds = LatLngBounds.builder()
-
-            places.forEach() {
-                bounds.include(it.latLng)
+            val bounds = LatLngBounds.Builder()
+            places.forEach { place ->
+                bounds.include(place.latLng)
             }
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100))
         }
         setUpMap()
     }
@@ -349,18 +318,21 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED ){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_REQUEST_CODE)
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_REQUEST_CODE
+            )
             return
         }
         map.isMyLocationEnabled = true
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) {  location ->
-            if (location != null){
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) { location ->
+            if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-               // placeMarkerOnMap(currentLatLng)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,12f))
+                // placeMarkerOnMap(currentLatLng)
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
             }
         }
     }
@@ -372,134 +344,215 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
     }
 
 
-    private fun addMarkers(googleMap: GoogleMap){
+    private fun addMarkers(googleMap: GoogleMap) {
         places.forEach() { place ->
             val marker = googleMap.addMarker(
                 MarkerOptions()
                     .title(place.name)
-                    .snippet(place.address)
-                    .position(place.latLng)
                     .snippet(place.cp)
-                    .icon(
-                        BitmapHelper.vectorToBitmap(this, R.drawable.ic_bolt3,ContextCompat.getColor(this,R.color.verdeclaro))
+                    .snippet(place.nivel)
+                    .snippet(place.address)
+                    .snippet(place.tipo)
+                    .position(place.latLng)
+                    .icon(BitmapHelper.vectorToBitmap(this, R.drawable.ic_bolt3,
+                            ContextCompat.getColor(this,R.color.verdeclaro))
                     )
             )
-           marker?.tag = place
+            marker?.tag = place
         }
     }
+    data class MarkerClickEvent(
+        val title: String,
+        val tipo: String,
+        val nivel: String,
+        val snippet: String,
+        val timestamp: Long
+    )
 
-
-    //override fun onMarkerClick(p0: Marker) = false
 
     override fun onMarkerClick(marker: Marker): Boolean {
+
         val place = marker.tag as? Place
         place?.let {
-           // fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
+            fetchDirections(LatLng(lastLocation.latitude, lastLocation.longitude), it.latLng)
+            saveMarkerClickEvent(marker)
         }
-        return false
-    }
-/*
+        return true
 
-    private fun getDirectionsUrl(from: LatLng, to: LatLng): String {
-        val origin = "origin=${from.latitude},${from.longitude}"
-        val destination = "destination=${to.latitude},${to.longitude}"
-        val sensor = "sensor=false"
-        val params = "$origin&$destination&$sensor"
-        return "https://maps.googleapis.com/maps/api/directions/json?$params"
     }
+
+    private fun saveMarkerClickEvent(marker: Marker) {
+        val sharedPreferences = getSharedPreferences("MarkerClicks", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val editor2 = sharedPreferences.edit()
+        val clickCount = sharedPreferences.getInt("clickCount", 0) + 1
+        editor.putInt("clickCount", clickCount)
+        editor.putString("lastClickedMarker", marker.title)
+        editor.putString("lastClickedMarkerType", marker.snippet)
+        editor.putLong("lastClickTimestamp", System.currentTimeMillis())
+        editor.apply()
+    }
+
+
 
     private fun fetchDirections(from: LatLng, to: LatLng) {
-        val url = getDirectionsUrl(from, to)
-        GlobalScope.launch {
-            val result = directionClient(url)
-            drawPolyline(result.toString())
-        }
-    }
-
-    suspend fun directionClient(url: String): DirectionsResponse {
-        val client = HttpClient {
-            install(JsonFeature) {
-                serializer = KotlinxSerializer()
+        scope.launch {
+            try {
+                val result = directionClient(from, to)
+                if (result != null) {
+                    val polylinePoints = extractAndDecodePolyline(result)
+                    if (polylinePoints != null) {
+                        drawPolyline(polylinePoints)
+                    } else {
+                        // Handle null polyline points
+                        Log.e("fetchDirections", "Polyline points are null")
+                    }
+                } else {
+                    // Handle null response
+                    Log.e("fetchDirections", "Directions response is null")
+                }
+            } catch (e: Exception) {
+                // Handle exception
+                Log.e("fetchDirections", "Error fetching directions: ${e.message}", e)
             }
         }
-
-        val directionsResponse: DirectionsResponse = client.get(url)
-        client.close()
-        return directionsResponse
     }
 
-    private fun drawPolyline(polylinePoints: String) {
-        val options = PolylineOptions()
-        options.color(Color.RED)
-        options.width(5f)
-        options.addAll(decodePolyline(polylinePoints))
-        map.addPolyline(options)
+
+    private fun extractAndDecodePolyline(response: String): List<LatLng>? {
+        return try {
+            val json = Json.parseToJsonElement(response)
+            val routes = json.jsonObject["routes"]?.jsonArray
+            if (routes != null && routes.size > 0) {
+                val route = routes[0].jsonObject
+                val legs = route["legs"]?.jsonArray
+                if (legs != null && legs.size > 0) {
+                    val steps = legs.flatMap { it.jsonObject["steps"]?.jsonArray ?: emptyList() }
+                    val points = steps.flatMap { it.jsonObject["polyline"]?.jsonObject?.get("points")?.jsonPrimitive?.content?.let { PolyUtil.decode(it) } ?: emptyList() }
+                    points
+                } else {
+                    null
+                }
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            // Handle exception
+            Log.e("extractAndDecodePolyline", "Error extracting and decoding polyline: ${e.message}", e)
+            null
+        }
     }
 
-    private fun decodePolyline(encoded: String): List<LatLng> {
-        val poly = ArrayList<LatLng>()
-        var index =  0
-        var len = encoded.length
-        var lat =  0
-        var lng =  0
+    private fun getDirectionsUrl(from: LatLng, to: LatLng,  apiKey: String): String {
+        // Construct the Directions API URL with the API key
+        val baseUrl = "https://maps.googleapis.com/maps/api/directions/json"
+        val origin = "origin=${from.latitude},${from.longitude}"
+        val destination = "destination=${to.latitude},${to.longitude}"
+        val apiKeyParam = "key=$apiKey"
+        return "$baseUrl?$origin&$destination&$apiKeyParam"
+    }
+
+    suspend fun directionClient(from: LatLng, to: LatLng): String? {
+        val url = getDirectionsUrl(from, to, API_KEY)
+        return try {
+            val client = HttpClient()
+            val responseText: String = client.get(url)
+
+            // Check if the response contains an error message
+            if (responseText.contains("error_message")) {
+                // Handle error response
+                println("Directions API returned an error message: $responseText")
+                return null
+            }
+
+            client.close()
+            return responseText
+        } catch (e: Exception) {
+            // Log the exception or handle it as needed
+            println("Error fetching directions: ${e.message}")
+            null
+        }
+    }
+
+    private fun drawPolyline(polylinePoints: List<LatLng>?) {
+        try {
+            if (polylinePoints != null) {
+                val options = PolylineOptions()
+                options.color(Color.RED)
+                options.width(5f)
+                options.addAll(polylinePoints)
+                runOnUiThread {
+                    // Clear existing polylines
+                    for (polyline in polylines) {
+                        polyline.remove()
+                    }
+                    polylines.clear()
+                    val polyline = map.addPolyline(options)
+                    polylines.add(polyline)
+                }
+                Log.d("PolylineDebug", "Decoded points: $polylinePoints") // Debugging line
+            } else {
+                Log.e("drawPolyline", "Polyline points are null")
+            }
+        } catch (e: Exception) {
+            Log.e("drawPolyline", "Error drawing polyline", e) // Debugging line
+        }
+    }
+
+    private fun decodePolyline(polyline: String): List<LatLng> {
+        val points = mutableListOf<LatLng>()
+        var index = 0
+        val len = polyline.length
+        var lat = 0
+        var lng = 0
 
         while (index < len) {
-            var b: Int
-            var shift =  0
-            var result =  0
+            var result = 1
+            var shift = 0
+            var temp: Int
             do {
-                b = encoded[index++].toInt() -  63
-                result = result or ((b and  0x1f).shl(shift))
-                shift +=  5
-            } while (b >=  0x20)
-            val dlat = if (result and  1 !=  0) (result shr  1).inv() else result shr  1
-            lat += dlat
-
-            shift =  0
-            result =  0
+                val char = polyline[index++].toInt() - 63 - 1
+                temp = char shl shift
+                result += temp
+                shift += 5
+            } while (char >= 0x1f)
+            lat += if (result and 1 != 0) (result shr 1).inv() else result shr 1
+            result = 1
+            shift = 0
             do {
-                b = encoded[index++].toInt() -  63
-                result = result or ((b and  0x1f).shl(shift))
-                shift +=  5
-            } while (b >=  0x20)
-            val dlng = if (result and  1 !=  0) (result shr  1).inv() else result shr  1
-            lng += dlng
+                val char = polyline[index++].toInt() - 63 - 1
+                temp = char shl shift
+                result += temp
+                shift += 5
+            } while (char >= 0x1f)
+            lng += if (result and 1 != 0) (result shr 1).inv() else result shr 1
 
-            val p = LatLng((lat.toDouble() /  1E5), (lng.toDouble() /  1E5))
-            poly.add(p)
+            val latLng = LatLng(lat * 1e-5, lng * 1e-5)
+            points.add(latLng)
         }
+        return points
+    }
 
-        return poly
-    }*/
+    data class Place(
+        val name: String,
+        val latLng: LatLng,
+        val address: String,
+        val cp: String,
+        val tipo: String,
+        val nivel: String
+    )
+
+    data class MarkerHistory(
+        val title: String,
+        val tipo: String,
+        val nivel: String,
+        val snippet: String,
+        val timestamp: Long
+    )
 
 }
 
-data class Place (
-    val name : String,
-            val latLng: LatLng,
-                    val address: String,
-                        val cp: String,
-                            val tipo : String,
-                                val nivel : String
-    )
-/*
-@Serializable
-data class DirectionsResponse(val routes: List<Route>) {
-    @Serializable
-    data class Route(val legs: List<Leg>, val overview_polyline: OverviewPolyline)
+class FilterResults {
 
-    @Serializable
-    data class Leg(val steps: List<Step>)
-
-    @Serializable
-    data class Step(val start_location: LatLng, val end_location: LatLng, val polyline: Polyline)
-
-    @Serializable
-    data class OverviewPolyline(val points: String)
-
-    @Serializable
-    data class Polyline(val points: String)
-
-    @Serializable
-    data class LatLng(val lat: Double, val lng: Double)
-}*/
+    lateinit var values: MutableList<Principal.Place>
+}
