@@ -560,6 +560,8 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
             txtTitle.text = it.name
             txtAddress.text = it.address
             txtCp.text = it.cp
+            txtTipo.text = it.tipo
+            txtNivel1.text= it.nivel
             // Set any additional information
         }
 
@@ -584,9 +586,4 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         val timestamp: Long
     )
 
-}
-
-class FilterResults {
-
-    lateinit var values: MutableList<Principal.Place>
 }
