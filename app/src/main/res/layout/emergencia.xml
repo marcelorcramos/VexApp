@@ -43,9 +43,9 @@
             app:layout_constraintBottom_toTopOf="@+id/editBox"/>
 
         <TextView
+            android:id="@+id/editBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editBox"
             android:textColor="@color/verdeclaro"
             android:textSize="16sp"
             android:text="+931 470 356"

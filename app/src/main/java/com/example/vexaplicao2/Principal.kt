@@ -264,7 +264,6 @@ class Principal : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCli
         setContentView(R.layout.activity_principal)
         setContentView(binding.root)
 
-
         binding.btnHistorico.setOnClickListener() {
             val irHistorico = Intent(this, Historico::class.java)
             startActivity(irHistorico)

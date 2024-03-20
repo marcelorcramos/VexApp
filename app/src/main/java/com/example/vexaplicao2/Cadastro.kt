@@ -55,8 +55,5 @@ class Cadastro : AppCompatActivity() {
             val voltarMain = Intent(this, MainActivity::class.java)
             startActivity(voltarMain)
         }
-
-
     }
-
 }

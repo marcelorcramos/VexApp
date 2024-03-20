@@ -37,7 +37,7 @@
       android:id="@+id/txtnome"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Marcelo"
+      android:text="   Carlos"
       android:textColor="@color/black"
       android:textSize="23dp"
       android:textStyle="bold"

@@ -34,7 +34,6 @@ class perfilultilizador : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.icSeta.setOnClickListener() {
 
             val voltarMaps = Intent(this, Principal::class.java)
