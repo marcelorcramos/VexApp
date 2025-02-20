@@ -1,24 +1,26 @@
 ReadMe - VEXAPP - Aplicação Mobile de Carregamento para Carros Elétricos
 
-Descrição
+No âmbito do meu projeto académico final na Escola Secundária Rainha Dona Leonor desenvolvi o VEX,
+uma plataforma inovadora para ajudar os utilizadores de carros eléctricos em Lisboa.
+A aplicação tem como objetivo otimizar a pesquisa e navegação até aos pontos de carregamento em Lisboa.
 
-Esta aplicação foi desenvolvida para utilizadores de carros elétricos que buscam otimizar a busca e navegação até os pontos de carregamento em Lisboa. Através da integração com o Google Maps e Firebase, o app permite aos utilizadores autenticar-se, encontrar carregadores próximos e visualizar informações detalhadas sobre cada estação, incluindo o tipo, a potência e o endereço de cada ponto de carregamento. Além disso, a aplicação traça rotas até o carregador selecionado.
+Depois de recolher informação nos pontos de carregamento de Lisboa, o 
+4 tipos diferentes de carregadores elétricos para carros, suas respectivas classificações (cada ponto de 
+carregamento possui uma classificação visual que indica a potência do carregador, que são 
+representado por raios, de 1 a 4, sendo 1 o mais fraco e 4 o mais forte.
 
-Funcionalidades
+O uso funciona de acordo com a localização do usuário, ao entrar no aplicativo sua localização
+é compartilhado com nossa plataforma e será identificado no mapa, portanto o usuário somente
+Você precisa escolher para qual carregador deseja ir e sua rota até ele será traçada.
 
-Autenticação de Utilizador: Utiliza o Firebase Authentication para permitir a criação de novos usuários e autenticação de usuários existentes. O utilizador pode se registrar, fazer login e acessar a plataforma.
-Localização: A aplicação possui acesso à localização do utilizador, permitindo calcular a distância até os pontos de carregamento mais próximos.
-Mapa de Carregadores: Através da integração com a API do Google Maps, é possível visualizar em um mapa os pontos de carregamento disponíveis em Lisboa.
-Detalhes do Carregador: Cada ponto de carregamento é marcado no mapa com o tipo de carregador, potência, nível de carregamento e a morada física. O tipo de carregador pode variar entre diferentes padrões, como Tipo 1, Tipo 2, CHAdeMO, ou CCS, dependendo da estação.
-Classificação de Potência: Cada ponto de carregamento possui uma classificação visual que indica a potência do carregador. A potência é representada por um número de raios, sendo:
-1 Raio = Nível 1 (Potência baixa)
-2 Raios = Nível 2 (Potência média)
-3 Raios = Nível 3 (Alta potência)
-4 Raios = Nível 4 (Potência muito alta)
-Rota para o Carregador: Ao selecionar um ponto de carregamento, a aplicação traça a melhor rota até o carregador utilizando a API do Google Maps para indicar a direção até o destino.
-Tecnologias Utilizadas
+Recursos adicionais da plataforma:
 
-Kotlin: Linguagem de programação para desenvolvimento Android.
-Firebase Authentication: Para gerenciamento de usuários e autenticação (login e registro).
-Google Maps API: Para exibir o mapa, mostrar os pontos de carregamento e traçar rotas.
-Firebase Firestore: Para armazenamento e gerenciamento dos dados de carregadores e preferências dos usuários.
+Cada usuário possui seu perfil pessoal com suas informações, a partir do momento em que sua conta é criada.
+É possível acessar seu histórico e obter informações como uso de cobrança e local onde ocorreu.
+E por fim, foi criado um botão de emergência em casos de acidentes ou para situações em que a bateria acabou.
+
+As tecnologias utilizadas durante o processo de desenvolvimento foram:
+-Kotlin: linguagem principal para desenvolvimento
+-API do Google Maps: obtenha a localização atual do usuário + forneça o mapa.
+-Armazenamento Firebase: banco de dados
+-Firabase Auth: Banco de dados para autenticação de acesso de usuários à plataforma
