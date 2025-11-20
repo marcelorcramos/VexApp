@@ -1,4 +1,4 @@
-ReadMe - VEXAPP - Aplicação Mobile de Carregamento para Carros Elétricos
+VEXAPP - Aplicação Mobile de Carregamento para Carros Elétricos
 
 No âmbito do meu projeto académico final na Escola Secundária Rainha Dona Leonor desenvolvi o VEX,
 uma plataforma inovadora para ajudar os utilizadores de carros eléctricos em Lisboa.
