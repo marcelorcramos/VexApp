@@ -1,26 +1,71 @@
-VEXAPP - Aplicação Mobile de Carregamento para Carros Elétricos
+⚡ VEXAPP
+Uma Solução Inteligente para Carregamento de Veículos Elétricos em Lisboa
 
-No âmbito do meu projeto académico final na Escola Secundária Rainha Dona Leonor desenvolvi o VEX,
-uma plataforma inovadora para ajudar os utilizadores de carros eléctricos em Lisboa.
-A aplicação tem como objetivo otimizar a pesquisa e navegação até aos pontos de carregamento em Lisboa.
+O VEXAPP é o meu projeto de final de curso da Escola Secundária Rainha Dona Leonor. Trata-se de uma aplicação móvel inovadora desenvolvida para simplificar e optimizar a experiência de carregamento para condutores de carros elétricos na cidade de Lisboa.
 
-Depois de recolher informação nos pontos de carregamento de Lisboa, o 
-4 tipos diferentes de carregadores elétricos para carros, suas respectivas classificações (cada ponto de 
-carregamento possui uma classificação visual que indica a potência do carregador, que são 
-representado por raios, de 1 a 4, sendo 1 o mais fraco e 4 o mais forte.
+A aplicação permite aos utilizadores localizar rapidamente pontos de carregamento, compreender as suas capacidades e traçar a rota mais eficiente até eles.
 
-O uso funciona de acordo com a localização do usuário, ao entrar no aplicativo sua localização
-é compartilhado com nossa plataforma e será identificado no mapa, portanto o usuário somente
-Você precisa escolher para qual carregador deseja ir e sua rota até ele será traçada.
+🚀 Funcionalidades Principais
+Mapa Interativo e Localização em Tempo Real:
 
-Recursos adicionais da plataforma:
+Integração com a API do Google Maps.
 
-Cada usuário possui seu perfil pessoal com suas informações, a partir do momento em que sua conta é criada.
-É possível acessar seu histórico e obter informações como uso de cobrança e local onde ocorreu.
-E por fim, foi criado um botão de emergência em casos de acidentes ou para situações em que a bateria acabou.
+Deteção automática da localização do utilizador para mostrar os pontos de carregamento mais próximos.
 
-As tecnologias utilizadas durante o processo de desenvolvimento foram:
--Kotlin: linguagem principal para desenvolvimento
--API do Google Maps: obtenha a localização atual do usuário + forneça o mapa.
--Armazenamento Firebase: banco de dados
--Firabase Auth: Banco de dados para autenticação de acesso de usuários à plataforma
+Sistema de Classificação Visual de Carregadores:
+
+Os pontos de carregamento são classificados por potência através de um sistema intuitivo de ícones de raio (⚡).
+
+⚡ (1 Raio): Potência mais baixa.
+
+⚡⚡ (2 Raios): Potência média.
+
+⚡⚡⚡ (3 Raios): Potência alta.
+
+⚡⚡⚡⚡ (4 Raios): Potência mais alta (rápido).
+
+Navegação Integrada:
+
+Seleciona um ponto de carregamento e a aplicação traça automaticamente a rota desde a tua localização atual.
+
+Perfil de Utilizador Pessoal:
+
+Cria e gere a tua conta para uma experiência personalizada.
+
+Acede ao teu histórico de carregamentos, incluindo dados de custo e localização.
+
+Botão de Emergência:
+
+Funcionalidade dedicada para situações de urgência, como avarias ou descarga total da bateria.
+
+🛠️ Tecnologias Utilizadas
+Linguagem de Programação: Kotlin
+
+Mapas e Localização: Google Maps API
+
+Base de Dados e Backend: Firebase Firestore
+
+Autenticação de Utilizadores: Firebase Authentication
+
+🔧 Instalação e Configuração
+(Podes preencher esta secção com os comandos específicos para construir e correr a tua app)
+
+Clona este repositório:
+
+bash
+git clone https://github.com/teu-username/vexapp.git
+Abre o projeto no Android Studio.
+
+Configura um projeto no Firebase Console e adiciona o ficheiro google-services.json à pasta app/ do teu projeto.
+
+Garante que tens uma chave de API da Google Maps válida e a configuraste no teu AndroidManifest.xml.
+
+Clica em "Run" para instalar a aplicação num emulador ou dispositivo físico.
+
+🎓 Projeto Académico
+Este projeto foi desenvolvido no âmbito da disciplina de Projeto de Final de Curso na Escola Secundária Rainha Dona Leonor.
+
+Aluno: Marcelo Ramos
+
+📄 Licença
+Este projeto é para fins académicos.
